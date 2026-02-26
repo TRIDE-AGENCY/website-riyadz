@@ -1,0 +1,618 @@
+/* PRIMARY */
+.btn-myprimary-filled,
+.btn-myprimary-filled i {
+	background-color: var(--base-color-600) !important;
+	color: var(--bs-white) !important
+}
+
+.btn-myprimary-filled:hover,
+.btn-myprimary-filled:hover i {
+	background-color: var(--base-color-700) !important
+}
+
+.btn-myprimary-outline,
+.btn-myprimary-outline i {
+	background-color: transparent !important;
+	color: var(--base-color-600) !important;
+}
+
+.btn-myprimary-outline {
+	border: 1px dashed var(--base-color-600) !important
+}
+
+.btn-myprimary-outline:hover,
+.btn-myprimary-outline:hover i {
+	background-color: var(--base-color-50) !important;
+	color: var(--base-color-700) !important;
+	border-color: var(--base-color-700) !important
+}
+
+.btn-myprimary-outlined,
+.btn-myprimary-outlined i {
+	background-color: transparent !important;
+	color: var(--base-color-600) !important;
+}
+
+.btn-myprimary-outlined {
+	border: 1px solid var(--base-color-600) !important
+}
+
+.btn-myprimary-outlined:hover,
+.btn-myprimary-outlined:hover i {
+	background-color: var(--base-color-200) !important;
+	color: var(--base-color-700) !important;
+	border-color: var(--base-color-700) !important
+}
+
+.btn-myprimary-tinted,
+.btn-myprimary-tinted i {
+	background-color: var(--base-color-100) !important;
+	color: var(--base-color-600) !important
+}
+
+.btn-myprimary-tinted:hover,
+.btn-myprimary-tinted:hover i {
+	background-color: var(--base-color-200) !important;
+	color: var(--base-color-700) !important
+}
+
+.btn-myprimary-ghost,
+.btn-myprimary-ghost i {
+	background-color: transparent !important;
+	color: var(--base-color-600) !important;
+}
+
+.btn-myprimary-ghost:hover,
+.btn-myprimary-ghost:hover i {
+	background-color: var(--base-color-100) !important;
+	color: var(--base-color-700) !important;
+}
+
+.btn-myprimary-light,
+.btn-myprimary-light i {
+	background-color: transparent !important;
+	color: var(--slate-500) !important;
+}
+
+.btn-myprimary-light:hover,
+.btn-myprimary-light:hover i {
+	background-color: var(--base-color-100) !important;
+	color: var(--base-color-600) !important;
+}
+
+.btn-link-myprimary,
+.btn-link-myprimary i {
+	color: var(--base-color-600) !important
+}
+
+.btn-link-myprimary:hover,
+.btn-link-myprimary:hover i {
+	color: var(--base-color-700) !important
+}
+
+/* SECONDARY */
+.btn-mysecondary-filled,
+.btn-mysecondary-filled i {
+	background-color: var(--amber-500) !important;
+	color: var(--bs-white) !important
+}
+
+.btn-mysecondary-filled:hover,
+.btn-mysecondary-filled:hover i {
+	background-color: var(--amber-600) !important
+}
+
+.btn-mysecondary-outline,
+.btn-mysecondary-outline i {
+	background-color: transparent !important;
+	color: var(--amber-500) !important;
+	border: 1px dashed var(--amber-500) !important
+}
+
+.btn-mysecondary-outline:hover,
+.btn-mysecondary-outline:hover i {
+	background-color: var(--amber-50) !important;
+	color: var(--amber-600) !important;
+	border: 1px dashed var(--amber-600) !important
+}
+
+.btn-mysecondary-tinted,
+.btn-mysecondary-tinted i {
+	background-color: var(--amber-100) !important;
+	color: var(--amber-500) !important
+}
+
+.btn-mysecondary-tinted:hover,
+.btn-mysecondary-tinted:hover i {
+	background-color: var(--amber-200) !important;
+	color: var(--amber-600) !important
+}
+
+.btn-mysecondary-ghost,
+.btn-mysecondary-ghost i {
+	background-color: transparent !important;
+	color: var(--amber-500) !important;
+}
+
+.btn-mysecondary-ghost:hover,
+.btn-mysecondary-ghost:hover i {
+	background-color: var(--amber-100) !important;
+	color: var(--amber-600) !important;
+}
+
+.btn-link-mysecondary,
+.btn-link-mysecondary i {
+	color: var(--amber-500) !important
+}
+
+.btn-link-mysecondary:hover,
+.btn-link-mysecondary:hover i {
+	color: var(--amber-600) !important
+}
+
+/* TERTIARY */
+.btn-mytertiary-outline,
+.btn-mytertiary-outline i {
+	background-color: transparent !important;
+	color: var(--slate-500) !important;
+	border: 1px solid var(--slate-300) !important
+}
+
+.btn-mytertiary-outline:hover,
+.btn-mytertiary-outline:hover i {
+	background-color: var(--slate-50) !important;
+	color: var(--slate-600) !important;
+	border: 1px solid var(--slate-400) !important
+}
+
+.btn-mytertiary-tinted,
+.btn-mytertiary-tinted i {
+	background-color: var(--slate-100) !important;
+	color: var(--slate-500) !important
+}
+
+.btn-mytertiary-tinted:hover,
+.btn-mytertiary-tinted:hover i {
+	background-color: var(--slate-200) !important;
+	color: var(--slate-600) !important
+}
+
+.btn-mytertiary-ghost,
+.btn-mytertiary-ghost i {
+	background-color: transparent !important;
+	color: var(--slate-500) !important;
+}
+
+.btn-mytertiary-ghost:hover,
+.btn-mytertiary-ghost:hover i {
+	background-color: var(--slate-100) !important;
+	color: var(--slate-600) !important;
+}
+
+.btn-mytertiary-ghostest,
+.btn-mytertiary-ghostest i {
+	background-color: transparent !important;
+	color: var(--slate-400) !important;
+}
+
+.btn-mytertiary-ghostest:hover,
+.btn-mytertiary-ghostest:hover i {
+	background-color: var(--slate-100) !important;
+	color: var(--slate-500) !important;
+}
+
+.btn-link-mytertiary,
+.btn-link-mytertiary i {
+	color: var(--slate-500) !important
+}
+
+.btn-link-mytertiary:hover,
+.btn-link-mytertiary:hover i {
+	color: var(--slate-600) !important
+}
+
+/* WHITE */
+.btn-mywhite,
+.btn-mywhite i {
+	background-color: var(--bs-white) !important;
+	color: var(--slate-500) !important;
+}
+
+.btn-mywhite:hover,
+.btn-mywhite:hover i {
+	color: var(--slate-600) !important;
+}
+
+.btn-mywhite-filled,
+.btn-mywhite-filled i {
+	background-color: var(--bs-white) !important;
+	color: var(--base-color-600) !important
+}
+
+.btn-mywhite-filled:hover,
+.btn-mywhite-filled:hover i {
+	color: var(--base-color-700) !important;
+}
+
+.btn-mywhite-outlined,
+.btn-mywhite-outlined i {
+	background-color: transparent !important;
+	color: var(--bs-white) !important;
+}
+
+.btn-mywhite-outlined {
+	border: 1px solid var(--bs-white) !important
+}
+
+.btn-mywhite-outlined:hover,
+.btn-mywhite-outlined:hover i {
+	background-color: var(--base-color-400) !important;
+}
+
+.btn-link-mywhite,
+.btn-link-mywhite i {
+	color: var(--bs-white) !important
+}
+
+.btn-link-mywhiter,
+.btn-link-mywhiter i {
+	color: var(--bs-white) !important;
+	opacity: .75 !important
+}
+
+.btn-link-mywhiter:hover,
+.btn-link-mywhiter:hover i {
+	opacity: 1 !important
+}
+
+.btn-link-mywhitest,
+.btn-link-mywhitest i {
+	color: var(--bs-white) !important;
+	opacity: .5 !important
+}
+
+.btn-link-mywhitest:hover,
+.btn-link-mywhitest:hover i {
+	opacity: .75 !important
+}
+
+/* DANGER */
+.btn-mydanger-filled,
+.btn-mydanger-filled i {
+	background-color: var(--red-500) !important;
+	color: var(--bs-white) !important
+}
+
+.btn-mydanger-filled:hover,
+.btn-mydanger-filled:hover i {
+	background-color: var(--red-600) !important
+}
+
+.btn-mydanger-outline,
+.btn-mydanger-outline i {
+	background-color: transparent !important;
+	color: var(--red-500) !important;
+	border: 1px dashed var(--red-500) !important
+}
+
+.btn-mydanger-outline:hover,
+.btn-mydanger-outline:hover i {
+	background-color: var(--red-50) !important;
+	color: var(--red-600) !important;
+	border: 1px dashed var(--red-600) !important
+}
+
+.btn-mydanger-tinted,
+.btn-mydanger-tinted i {
+	background-color: var(--red-100) !important;
+	color: var(--red-500) !important
+}
+
+.btn-mydanger-tinted:hover,
+.btn-mydanger-tinted:hover i {
+	background-color: var(--red-200) !important;
+	color: var(--red-600) !important
+}
+
+.btn-mydanger-ghost,
+.btn-mydanger-ghost i {
+	background-color: transparent !important;
+	color: var(--red-500) !important;
+}
+
+.btn-mydanger-ghost:hover,
+.btn-mydanger-ghost:hover i {
+	background-color: var(--red-100) !important;
+	color: var(--red-600) !important;
+}
+
+.btn-link-mydanger,
+.btn-link-mydanger i {
+	color: var(--red-500) !important
+}
+
+.btn-link-mydanger:hover,
+.btn-link-mydanger:hover i {
+	color: var(--red-600) !important
+}
+
+/* WARNING */
+.btn-mywarning-filled,
+.btn-mywarning-filled i {
+	background-color: var(--amber-500) !important;
+	color: var(--bs-white) !important
+}
+
+.btn-mywarning-filled:hover,
+.btn-mywarning-filled:hover i {
+	background-color: var(--amber-600) !important
+}
+
+.btn-mywarning-outline,
+.btn-mywarning-outline i {
+	background-color: transparent !important;
+	color: var(--amber-500) !important;
+	border: 1px dashed var(--amber-500) !important
+}
+
+.btn-mywarning-outline:hover,
+.btn-mywarning-outline:hover i {
+	background-color: var(--amber-50) !important;
+	color: var(--amber-600) !important;
+	border: 1px dashed var(--amber-600) !important
+}
+
+.btn-mywarning-tinted,
+.btn-mywarning-tinted i {
+	background-color: var(--amber-100) !important;
+	color: var(--amber-500) !important
+}
+
+.btn-mywarning-tinted:hover,
+.btn-mywarning-tinted:hover i {
+	background-color: var(--amber-200) !important;
+	color: var(--amber-600) !important
+}
+
+.btn-mywarning-ghost,
+.btn-mywarning-ghost i {
+	background-color: transparent !important;
+	color: var(--amber-500) !important;
+}
+
+.btn-mywarning-ghost:hover,
+.btn-mywarning-ghost:hover i {
+	background-color: var(--amber-100) !important;
+	color: var(--amber-600) !important;
+}
+
+.btn-link-mywarning,
+.btn-link-mywarning i {
+	color: var(--amber-500) !important
+}
+
+.btn-link-mywarning:hover,
+.btn-link-mywarning:hover i {
+	color: var(--amber-600) !important
+}
+
+/* SUCCESS */
+.btn-mysuccess-filled,
+.btn-mysuccess-filled i {
+	background-color: var(--green-500) !important;
+	color: var(--bs-white) !important
+}
+
+.btn-mysuccess-filled:hover,
+.btn-mysuccess-filled:hover i {
+	background-color: var(--green-600) !important
+}
+
+.btn-mysuccess-outline,
+.btn-mysuccess-outline i {
+	background-color: transparent !important;
+	color: var(--green-500) !important;
+	border: 1px dashed var(--green-500) !important
+}
+
+.btn-mysuccess-outline:hover,
+.btn-mysuccess-outline:hover i {
+	background-color: var(--green-50) !important;
+	color: var(--green-600) !important;
+	border: 1px dashed var(--green-600) !important
+}
+
+.btn-mysuccess-tinted,
+.btn-mysuccess-tinted i {
+	background-color: var(--green-100) !important;
+	color: var(--green-500) !important
+}
+
+.btn-mysuccess-tinted:hover,
+.btn-mysuccess-tinted:hover i {
+	background-color: var(--green-200) !important;
+	color: var(--green-600) !important
+}
+
+.btn-mysuccess-ghost,
+.btn-mysuccess-ghost i {
+	background-color: transparent !important;
+	color: var(--green-500) !important;
+}
+
+.btn-mysuccess-ghost:hover,
+.btn-mysuccess-ghost:hover i {
+	background-color: var(--green-100) !important;
+	color: var(--green-600) !important;
+}
+
+.btn-link-mysuccess,
+.btn-link-mysuccess i {
+	color: var(--green-500) !important
+}
+
+.btn-link-mysuccess:hover,
+.btn-link-mysuccess:hover i {
+	color: var(--green-600) !important
+}
+
+.btn.btn-active-myprimary.active,
+.btn.btn-active-myprimary:hover.active:hover {
+	border-color: var(--base-color-600) !important;
+	background-color: var(--base-color-600) !important;
+	color: var(--bs-white) !important
+}
+
+.btn.btn-active-myprimary:hover:not(.btn-active) {
+	border-color: var(--base-color-100) !important;
+	background-color: var(--base-color-100) !important;
+	color: var(--base-color-700) !important
+}
+
+.btn.btn-active-mydanger.active,
+.btn.btn-active-mydanger:hover.active:hover {
+	border-color: var(--red-500) !important;
+	background-color: var(--red-500) !important;
+	color: var(--bs-white) !important
+}
+
+.btn.btn-active-mydanger:hover:not(.btn-active) {
+	border-color: var(--red-100) !important;
+	background-color: var(--red-100) !important;
+	color: var(--red-600) !important
+}
+
+.menu-item .menu-link {
+	font-weight: 500;
+}
+
+.menu-item .menu-link.active {
+	font-weight: 700 !important;
+}
+
+.menu-link-mysecondary .menu-icon>i,
+.menu-link-mysecondary .menu-title {
+	color: var(--slate-500) !important
+}
+
+.menu-link-mysecondary .menu-arrow::after {
+	background-color: var(--slate-500) !important
+}
+
+.menu-link-mysecondary:hover {
+	background-color: var(--slate-100) !important
+}
+
+.menu-link-mysecondary:hover .menu-icon>i,
+.menu-link-mysecondary:hover .menu-title {
+	color: var(--slate-600) !important
+}
+
+.menu-link-mysecondary:hover .menu-arrow::after {
+	background-color: var(--slate-600) !important
+}
+
+.menu-link-mysecondary.active {
+	background-color: var(--base-color-600) !important
+}
+
+.menu-link-mysecondary.active:hover {
+	background-color: var(--base-color-700) !important
+}
+
+.text-mysecondary {
+	color: var(--base-color-700) !important
+}
+
+.menu-link-mysecondary.active .menu-icon>i,
+.menu-link-mysecondary.active .menu-title {
+	color: var(--bs-white) !important
+}
+
+.menu-state-title-primary .menu-item .menu-link.active .menu-title {
+	color: var(--base-color-600) !important
+}
+
+.sub-menu-link:hover {
+	background: linear-gradient(to right, var(--slate-200), var(--bs-white)) !important
+}
+
+.sub-menu-link.active {
+	background: linear-gradient(to right, var(--base-color-100), var(--bs-white)) !important
+}
+
+.sub-menu-link.active:hover {
+	background: linear-gradient(to right, var(--base-color-200), var(--bs-white)) !important
+}
+
+.nav-link {
+	font-weight: 400;
+	color: var(--slate-400) !important;
+	padding: .75rem 0 !important;
+	border: none !important;
+}
+
+.nav-link:hover {
+	color: var(--slate-500) !important;
+	box-shadow: inset 0 -4px 0 var(--base-color-200) !important;
+}
+
+.nav-link.active {
+	font-weight: 600;
+	color: var(--text-dark) !important;
+	box-shadow: inset 0 -4px 0 var(--base-color-600) !important;
+}
+
+.nav-link.active:hover {
+	box-shadow: inset 0 -4px 0 var(--base-color-700) !important;
+}
+
+.nav-link.navigation {
+	box-shadow: none !important;
+}
+
+.navbar-link {
+	padding: 0.75rem !important
+}
+
+@media (min-width:992px) {
+	.navbar-link {
+		padding: .75rem 1.5rem !important
+	}
+}
+
+.navbar-link:hover,
+.navbar-link.active,
+.navbar-link.active:hover {
+	border: none !important;
+	box-shadow: none !important;
+}
+
+.card-hover {
+	transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out !important;
+}
+
+.card-hover:hover {
+	box-shadow: 0 8px 24px rgb(0 0 0 / .08) !important;
+}
+
+.btn-myopacity-dark {
+	background-color: rgba(0, 0, 0, 0.25) !important;
+}
+
+.btn-myopacity-dark i {
+	color: var(--bs-white) !important
+}
+
+.btn-myopacity-dark:hover {
+	background-color: rgba(0, 0, 0, 0.35) !important;
+}
+
+.btn-link-footer {
+    transition: all 0.2s;
+}
+
+.btn-link-footer:hover {
+    font-weight: 600;
+    color: var(--base-color-600) !important;
+}
