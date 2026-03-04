@@ -23,6 +23,7 @@ Route::prefix('/admin')->name('admin.')->group(function () {
             Route::get('/blogs', 'index')->name('index');
             Route::get('/blogs/create', 'create')->name('create');
             Route::post('/blogs', 'store')->name('store');
+            Route::post('/blogs/upload-image', 'uploadImageEditor')->name('upload_image');
             Route::get('/blogs/{blog}/edit', 'edit')->name('edit');
             Route::put('/blogs/{blog}', 'update')->name('update');
             Route::delete('/blogs/{blog}', 'destroy')->name('destroy');

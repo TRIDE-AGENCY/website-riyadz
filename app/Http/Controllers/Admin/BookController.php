@@ -29,7 +29,11 @@ class BookController extends Controller
 
     public function create()
     {
-        return inertia('Admin/Book/Create', []);
+        $api_tinymce_key = Setting::value('api_tinymce_key');
+
+        return inertia('Admin/Book/Create', [
+            'api_tinymce_key' => $api_tinymce_key,
+        ]);
     }
 
     public function store(Request $request)
@@ -37,7 +41,7 @@ class BookController extends Controller
         $request->validate([
             'title'       => 'required|unique:books,title',
             'id_book'     => 'required|unique:books,id_book',
-            'image'       => 'required|image|mimes:jpg,jpeg,png|max:10240',
+            'image'       => 'required|image|mimes:jpg,jpeg,png,webp|max:10240',
             'author'      => 'required',
             'launch_date' => 'required',
             'total_pages' => 'required',
@@ -47,7 +51,7 @@ class BookController extends Controller
             'id_book.unique'   => 'ID gdrive sudah digunakan. Gunakan yang lain.',
             'image.required'   => 'Gambar tidak boleh kosong.',
             'image.image'      => 'Gambar buku harus berupa file gambar.',
-            'image.mimes'      => 'Gambar buku harus berekstensi jpg, jpeg, atau png.',
+            'image.mimes'      => 'Gambar buku harus berekstensi jpg, jpeg, png, atau webp.',
             'image.max'        => 'Ukuran gambar buku maksimal 10MB.',
         ]);
 
@@ -73,8 +77,11 @@ class BookController extends Controller
         $book->image_name = basename($book->image);
         $book->image_size = Storage::disk('public')->size($book->image);
 
+        $api_tinymce_key = Setting::value('api_tinymce_key');
+
         return inertia('Admin/Book/Edit', [
-            'book'        => $book,
+            'book'            => $book,
+            'api_tinymce_key' => $api_tinymce_key,
         ]);
     }
 
@@ -83,7 +90,7 @@ class BookController extends Controller
         $request->validate([
             'title'       => 'required|unique:books,title,' . $book->id,
             'id_book'     => 'required|unique:books,id_book,' . $book->id,
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'author'      => 'required',
             'launch_date' => 'required',
             'total_pages' => 'required',
@@ -92,7 +99,7 @@ class BookController extends Controller
             'title.unique'     => 'Judul sudah digunakan. Gunakan judul lain.',
             'id_book.unique'   => 'ID gdrive sudah digunakan. Gunakan yang lain.',
             'image.image'      => 'Gambar buku harus berupa file gambar.',
-            'image.mimes'      => 'Gambar buku harus berekstensi jpg, jpeg, atau png.',
+            'image.mimes'      => 'Gambar buku harus berekstensi jpg, jpeg, png, atau webp.',
             'image.max'        => 'Ukuran gambar buku maksimal 10MB.',
         ]);
 

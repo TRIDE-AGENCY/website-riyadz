@@ -29,7 +29,7 @@
                                 {{ setting.site_title }}
                             </h2>
                             <p class="text-gray-600 lh-lg fs-3 mb-0 mw-500px mw-md-425px">
-                                Seorang <span class="fw-bolder text-dark">Apoteker</span> 💊 yang percaya bahwa ilmu & profesi adalah amal jariah, seorang <span class="fw-bolder text-dark">Penulis</span> ✍️ yang menjadikan kata sebagai jalan ibadah dan inspirasi, serta seorang <span class="fw-bolder text-dark">Pengusaha</span> 🤝 yang meyakini bahwa kebermanfaatan adalah inti dari setiap usaha.
+                                {{ setting.meta_description }}
                             </p>
                         </div>
                     </div>
@@ -152,7 +152,7 @@
                                 <div id="blog-card">
                                     <div class="row g-4 h-100">
                                         <div class="col-12 col-sm-6 col-md-5">
-                                            <div class="overflow-hidden position-relative rounded-3 ratio ratio-4x3 h-100">
+                                            <div class="overflow-hidden position-relative rounded-3 border border-gray-300 ratio ratio-4x3 h-100">
                                                 <img
                                                     class="img-blog img-fluid object-fit-cover"
                                                     :src="`/storage/${blog.image}`"
@@ -179,7 +179,7 @@
                             </a>
                         </div>
                         <img v-if="recentBlogs && recentBlogs.length > 2"
-                            src="/assets/media/illustrations/img-book.jpeg" alt="Iklan" style="top: 90px;"
+                            :src="`/storage/${setting.ads_image}`" alt="Iklan" style="top: 90px;"
                             class="position-sticky d-none d-sm-flex w-120px h-600px rounded-4 img-fluid object-fit-cover">
                     </div>
                     <!-- <a v-for="blog in recentBlogs" :key="blog.id"
@@ -264,10 +264,16 @@
                     :href="`/books/${books[0].slug}`"
                     class="position-relative card border border-gray-300 p-10 pb-0 pb-lg-10 gap-10 w-100 mw-500px mw-lg-800px h-lg-300px mx-auto rounded-4 bg-light">
                     <div class="h-100 d-flex flex-column flex-center flex-lg-start me-lg-20 pe-lg-20 ">
-                        <h3 class="flex-fill text-dark text-center me-lg-20 pe-lg-20 text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-3 mb-6">
-                            {{ books[0].title }}
-                        </h3>
-                        <div class="me-lg-20 pe-lg-20 d-flex flex-column align-items-lg-start">
+                        <div class="flex-fill mb-6 me-lg-20 pe-lg-20">
+                            <h3 class="text-dark text-center text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-2 mb-0">
+                                {{ books[0].title }}
+                            </h3>
+                            <p v-if="books[0].description"
+                                class="text-gray-600 text-center text-lg-start text-truncate-2 fs-5 mt-3 mb-0">
+                                {{ stripHtml(books[0].description) }}
+                            </p>
+                        </div>
+                        <div class="me-lg-20 pe-lg-20 d-flex flex-column align-items-center align-items-lg-start">
                             <div class="fw-bolder d-flex align-items-center gap-2 mb-2 mb-lg-3">
                                 <i class="blog-icon ri-user-fill fw-semibold fs-2 text-myprimary"></i>
                                 <span class="fs-4 text-myprimary">{{ books[0].author }}</span>
@@ -279,7 +285,7 @@
                         </div>
                     </div>
                     <img
-                        class="position-lg-absolute rounded-3 rounded-bottom-0 bottom-0 end-0 img-fluid object-fit-cover mw-300px w-lg-auto me-lg-10 h-lg-325px mx-auto w-100"
+                        class="position-lg-absolute rounded-3 border border-gray-300 border-bottom-0 rounded-bottom-0 bottom-0 end-0 img-fluid object-fit-cover mw-300px w-lg-auto me-lg-10 h-lg-325px mx-auto w-100"
                         :src="`/storage/${books[0].image}`"
                         :alt="books[0].title"
                     />
@@ -288,15 +294,21 @@
                     :href="`/books/${books[1].slug}`"
                     class="mt-6 mt-lg-14 position-relative card border border-gray-300 p-10 pb-0 pb-lg-10 gap-10 w-100 mw-500px mw-lg-800px h-lg-300px mx-auto rounded-4 bg-light">
                     <img
-                        class="order-1 position-lg-absolute rounded-3 rounded-bottom-0 bottom-0 start-0 img-fluid object-fit-cover mw-300px w-lg-auto ms-lg-10 h-lg-325px mx-auto w-100"
+                        class="order-1 position-lg-absolute rounded-3 border border-gray-300 border-bottom-0 rounded-bottom-0 bottom-0 start-0 img-fluid object-fit-cover mw-300px w-lg-auto ms-lg-10 h-lg-325px mx-auto w-100"
                         :src="`/storage/${books[1].image}`"
                         :alt="books[1].title"
                     />
                     <div class="h-100 d-flex flex-column flex-center flex-lg-start ms-lg-20 ps-lg-20 ">
-                        <h3 class="flex-fill text-dark text-center ms-lg-20 ps-lg-20 text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-3 mb-6">
-                            {{ books[1].title }}
-                        </h3>
-                        <div class="ms-lg-20 ps-lg-20 d-flex flex-column align-items-lg-start">
+                        <div class="flex-fill mb-6 ms-lg-20 ps-lg-20">
+                            <h3 class="text-dark text-center text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-2 mb-0">
+                                {{ books[1].title }}
+                            </h3>
+                            <p v-if="books[1].description"
+                                class="text-gray-600 text-center text-lg-start text-truncate-2 fs-5 mt-3 mb-0">
+                                {{ stripHtml(books[1].description) }}
+                            </p>
+                        </div>
+                        <div class="ms-lg-20 ps-lg-20 d-flex flex-column align-items-center align-items-lg-start">
                             <div class="fw-bolder d-flex align-items-center gap-2 mb-2 mb-lg-3">
                                 <i class="blog-icon ri-user-fill fw-semibold fs-2 text-myprimary"></i>
                                 <span class="fs-4 text-myprimary">{{ books[1].author }}</span>
@@ -312,10 +324,16 @@
                     :href="`/books/${books[2].slug}`"
                     class="mt-6 mt-lg-14 position-relative card border border-gray-300 p-10 pb-0 pb-lg-10 gap-10 w-100 mw-500px mw-lg-800px h-lg-300px mx-auto rounded-4 bg-light">
                     <div class="h-100 d-flex flex-column flex-center flex-lg-start me-lg-20 pe-lg-20 ">
-                        <h3 class="flex-fill text-dark text-center me-lg-20 pe-lg-20 text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-3 mb-6">
-                            {{ books[2].title }}
-                        </h3>
-                        <div class="me-lg-20 pe-lg-20 d-flex flex-column align-items-lg-start">
+                        <div class="flex-fill mb-6 me-lg-20 pe-lg-20">
+                            <h3 class="text-dark text-center text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-2 mb-0">
+                                {{ books[2].title }}
+                            </h3>
+                            <p v-if="books[2].description"
+                                class="text-gray-600 text-center text-lg-start text-truncate-2 fs-5 mt-3 mb-0">
+                                {{ stripHtml(books[2].description) }}
+                            </p>
+                        </div>
+                        <div class="me-lg-20 pe-lg-20 d-flex flex-column align-items-center align-items-lg-start">
                             <div class="fw-bolder d-flex align-items-center gap-2 mb-2 mb-lg-3">
                                 <i class="blog-icon ri-user-fill fw-semibold fs-2 text-myprimary"></i>
                                 <span class="fs-4 text-myprimary">{{ books[2].author }}</span>
@@ -327,7 +345,7 @@
                         </div>
                     </div>
                     <img
-                        class="position-lg-absolute rounded-3 rounded-bottom-0 bottom-0 end-0 img-fluid object-fit-cover mw-300px w-lg-auto me-lg-10 h-lg-325px mx-auto w-100"
+                        class="position-lg-absolute rounded-3 border border-gray-300 border-bottom-0 rounded-bottom-0 bottom-0 end-0 img-fluid object-fit-cover mw-300px w-lg-auto me-lg-10 h-lg-325px mx-auto w-100"
                         :src="`/storage/${books[2].image}`"
                         :alt="books[2].title"
                     />
@@ -403,10 +421,17 @@
                 return date >= oneMonthAgo;
             };
 
+            const stripHtml = (html) => {
+                if (!html) return "Belum ada deskripsi untuk buku ini.";
+                let text = html.replace(/<[^>]*>?/gm, '');
+                return text;
+            };
+
             return { 
                 formatDate, 
                 getYear,
                 isRecent,
+                stripHtml
             };
         }
     }

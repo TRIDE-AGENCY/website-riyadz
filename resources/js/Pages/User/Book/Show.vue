@@ -35,7 +35,7 @@
                             <h1 style="font-weight: 800 !important;" class="text-dark lh-sm fw-bolder fs-3x mb-5">
                                 {{ book.title }}
                             </h1>
-                            <div class="d-flex flex-wrap align-items-center justify-content-start text-gray-600 fs-5 gap-4">
+                            <div class="d-flex flex-wrap align-items-center justify-content-start text-gray-600 fs-5 gap-3 gap-md-4">
                                 <span class="d-flex align-items-center gap-2 fw-semibold fs-5">
                                     <i class="ri-user-line fs-5 text-gray-600"></i> 
                                     {{ book.author }}
@@ -45,13 +45,20 @@
                                     <i class="ri-article-line fs-5 text-gray-600"></i> 
                                     {{ book.total_pages }} Hal ({{ getYear(book.launch_date) }})
                                 </span>
+                                <span class="bullet bullet-dot bg-gray-500 h-5px w-5px"></span>
+                                <span class="d-flex align-items-center gap-2 fw-semibold fs-5">
+                                    <i class="ri-eye-line fs-5 text-gray-600"></i> 
+                                    {{ book.views.toLocaleString('id-ID') }}x Dilihat
+                                </span>
                             </div>
                         </div>
 
                         <div class="text-start">
                             <h3 class="fw-bolder text-dark mb-4 fs-2">Sinopsis / Deskripsi</h3>
-                            <p class="text-gray-600 fs-5 lh-lg mb-0 book-description">
-                                {{ book.description || 'Tidak ada deskripsi untuk buku ini.' }}
+                            <p v-if="book.description"
+                                class="fs-5 lh-lg mb-0 book-content" v-html="book.description"></p>
+                            <p v-else class="text-gray-600 fs-5 lh-lg mb-0">
+                                Tidak ada deskripsi untuk buku ini.
                             </p>
                         </div>
                     </div>
@@ -59,7 +66,7 @@
                         <img
                             :src="`/storage/${book.image}`"
                             :alt="book.title"
-                            class="img-fluid w-100 rounded-3 object-fit-cover"
+                            class="img-fluid w-100 rounded-3 border border-gray-300 object-fit-cover"
                         />
                         <a :href="gdriveLink" target="_blank" class="btn ps-7 pe-6 btn-myprimary-filled w-100 rounded-pill fs-4 mt-6 d-flex align-items-center justify-content-center gap-2">
                             <span class="fw-bolder">Baca Layar Penuh</span>
@@ -207,8 +214,78 @@
         transform: translateX(-5px);
     }
 
-    .book-description {
-        white-space: pre-line;
+    .book-content {
+        line-height: 1.8;
+        font-size: 1.15rem; 
+    }
+
+    .book-content h2, 
+    .book-content h3, 
+    .book-content h4 {
+        font-weight: 800;
+        color: #181C32; 
+        margin-top: 1.8em;
+        margin-bottom: 0.8em;
+        line-height: 1.4;
+    }
+
+    .book-content h2 {
+        font-size: 2rem; 
+    }
+
+    .book-content h3 {
+        font-size: 1.65rem;
+    }
+
+    .book-content h4 {
+        font-size: 1.35rem; 
+    }
+
+    .book-content p {
+        margin-bottom: 0.75em;
+    }
+
+    .book-content img {
+        max-width: 100%;
+        height: auto;
+        border-radius: 0.75rem;
+        margin: 2rem 0;
+        box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.05);
+    }
+
+    .book-content blockquote {
+        font-style: italic;
+        color: var(--bs-gray-700);
+        border-left: 4px solid var(--base-color-600);
+        padding-left: 1.5rem;
+        margin: 2rem 0;
+        background: var(--bs-gray-100);
+        padding: 1.5rem;
+        border-radius: 0 0.5rem 0.5rem 0;
+    }
+
+    .book-content a {
+        color: var(--base-color-600);
+        text-decoration: none;
+        font-weight: 700;
+    }
+
+    .book-content a:hover {
+        text-decoration-color: var(--base-color-600);
+    }
+
+    .book-content ul, 
+    .book-content ol {
+        margin-bottom: 1.5em;
+        padding-left: 2rem;
+    }
+
+    .book-content li {
+        margin-bottom: 0.25em;
+    }
+
+    .book-content li p {
+        margin-bottom: 0;
     }
 
     .share-btn {

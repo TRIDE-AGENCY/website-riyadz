@@ -25,6 +25,12 @@ class BlogController extends Controller
                     ->where('status', 'published')
                     ->firstOrFail();
 
+        $sessionKey = 'viewed_blog_' . $blog->id;
+        if (!session()->has($sessionKey)) {
+            $blog->increment('views');
+            session()->put($sessionKey, true);
+        }
+
         $description = Str::limit(strip_tags($blog->content), 150);
 
         return inertia('User/Blog/Show', [
@@ -33,6 +39,11 @@ class BlogController extends Controller
             'description' => $description,
             'current_url' => url()->current(),
             'app_url'     => rtrim($setting->site_url, '/'),
+        ])->withViewData([
+            'meta_title'       => $blog->title . ' − ' . $setting->site_title,
+            'meta_description' => $description,
+            'meta_image'       => asset('storage/' . $blog->image),
+            'meta_url'         => url()->current(),
         ]);
     }
 }

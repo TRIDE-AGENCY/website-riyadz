@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Message;
 use Illuminate\Http\Request;
 use Spatie\Analytics\Facades\Analytics;
 use Spatie\Analytics\Period;
@@ -84,7 +85,10 @@ class DashboardController extends Controller
             '00:00'
         );
 
+        $pendingMessagesCount = Message::where('status', 'pending')->count();
+
         return inertia('Admin/Dashboard/Index', [
+            'pending_messages_count' => $pendingMessagesCount,
             'total_visits'          => $totalVisits,
             'total_users'           => $totalUsers,
             'new_users'             => $newUsers,

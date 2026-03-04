@@ -30,5 +30,7 @@ class Setting extends Model
         'api_tinymce_key',
         'ga_property_id',
         'ga_measurement_id',
+
+        'ads_image',
     ];
 }

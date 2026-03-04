@@ -37,6 +37,7 @@ class SettingController extends Controller
             'api_tinymce_key'   => 'required', 
             'ga_property_id'    => 'nullable|string',
             'ga_measurement_id' => 'nullable|string',
+            'ads_image'         => 'nullable|image|max:10240',
         ]);
 
         $setting = Setting::first();
@@ -68,6 +69,15 @@ class SettingController extends Controller
             $imagePath = $request->input('og_image_old') ?? ($setting->og_image ?? null);
         }
 
+        if ($request->hasFile('ads_image')) {
+            if (!empty($setting->ads_image) && Storage::disk('public')->exists(str_replace('/storage/', '', $setting->ads_image))) {
+                Storage::disk('public')->delete(str_replace('/storage/', '', $setting->ads_image));
+            }
+            $adsPath = $request->file('ads_image')->store('setting', 'public');
+        } else {
+            $adsPath = $request->input('ads_image_old') ?? ($setting->ads_image ?? null);
+        }
+
         $setting->update([
             'site_title'         => $request->site_title,
             'site_url'           => $request->site_url,
@@ -85,6 +95,7 @@ class SettingController extends Controller
             'api_tinymce_key'    => $request->api_tinymce_key,
             'ga_property_id'     => $request->ga_property_id,
             'ga_measurement_id'  => $request->ga_measurement_id,
+            'ads_image'          => $adsPath,
         ]);
 
         return redirect()->route('admin.settings.index');

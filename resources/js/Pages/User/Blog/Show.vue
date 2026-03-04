@@ -33,7 +33,7 @@
                     <h1 style="font-weight: 800 !important;" class="text-dark lh-sm fw-bolder fs-3x mb-5">
                         {{ blog.title }}
                     </h1>
-                    <div class="d-flex align-items-center justify-content-start text-gray-600 fs-5 gap-4">
+                    <div class="d-flex flex-wrap align-items-center justify-content-start text-gray-600 fs-5 gap-3 gap-md-4">
                         <span class="d-flex align-items-center gap-2 fw-semibold fs-5">
                             <i class="ri-calendar-line fs-5 text-gray-600"></i> 
                             {{ formatDate(blog.created_at) }}
@@ -42,6 +42,11 @@
                         <span class="d-flex align-items-center gap-2 fw-semibold fs-5">
                             <i class="ri-time-line fs-5 text-gray-600"></i> 
                             {{ readingTime }}
+                        </span>
+                        <span class="bullet bullet-dot bg-gray-500 h-5px w-5px"></span>
+                        <span class="d-flex align-items-center gap-2 fw-semibold fs-5">
+                            <i class="ri-eye-line fs-5 text-gray-600"></i> 
+                            {{ blog.views.toLocaleString('id-ID') }}x Dilihat
                         </span>
                     </div>
                 </div>
@@ -107,18 +112,18 @@
         setup(props) {
             const formatDate = (dateString) => {
                 const date = new Date(dateString);
-                return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
+                return date.toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
             };
 
             const readingTime = computed(() => {
-                if (!props.blog || !props.blog.content) return '1 menit baca';
+                if (!props.blog || !props.blog.content) return '1 Menit Baca';
 
                 const plainText = props.blog.content.replace(/<[^>]+>/g, '');
                 const wordCount = plainText.trim().split(/\s+/).length;
                 const wordsPerMinute = 200;
                 const minutes = Math.ceil(wordCount / wordsPerMinute);
                 
-                return `${minutes} menit baca`;
+                return `${minutes} Menit Baca`;
             });
             
             const encodedUrl = computed(() => encodeURIComponent(props.current_url));
@@ -206,15 +211,14 @@
     }
 
     .blog-content p {
-        margin-bottom: 1.5em;
+        margin-bottom: 0.75em;
     }
 
     .blog-content img {
         max-width: 100%;
         height: auto;
-        border-radius: 0.75rem;
-        margin: 2rem 0;
-        box-shadow: 0 0.5rem 1.5rem rgba(0,0,0,0.05);
+        margin: 0.25em 0;
+        border-radius: 1rem;
     }
 
     .blog-content blockquote {
@@ -222,7 +226,7 @@
         color: var(--bs-gray-700);
         border-left: 4px solid var(--base-color-600);
         padding-left: 1.5rem;
-        margin: 2rem 0;
+        margin: 0.75em 0;
         background: var(--bs-gray-100);
         padding: 1.5rem;
         border-radius: 0 0.5rem 0.5rem 0;
@@ -245,7 +249,11 @@
     }
 
     .blog-content li {
-        margin-bottom: 0.5em;
+        margin-bottom: 0.25em;
+    }
+
+    .blog-content li p {
+        margin-bottom: 0;
     }
 
     .share-btn {

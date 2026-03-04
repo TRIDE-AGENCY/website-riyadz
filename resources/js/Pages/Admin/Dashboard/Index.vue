@@ -92,7 +92,7 @@
                                             <h1
                                                 class="fs-3qx fs-md-2x fw-bolder mb-0"
                                             >
-                                                0
+                                                {{ pending_messages_count.toLocaleString('id-ID') }}
                                             </h1>
                                         </div>
                                         <div
@@ -511,6 +511,7 @@
             browsers: Array,
             devices: Array,
             filters: Object,
+            pending_messages_count: Number,
         },
 
         setup(props) {

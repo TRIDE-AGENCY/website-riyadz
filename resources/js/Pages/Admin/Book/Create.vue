@@ -110,10 +110,11 @@
                                     </div>
                                     <div class="card-body p-6">
                                         <div class="fv-row">
-                                            <textarea class="form-control rounded-3 fs-5" data-kt-autosize="true" rows="8"
-                                                placeholder="Masukkan deskripsi disini..."
-                                                v-model="form.description" :class="{ 'is-invalid': errors.description }">
-                                            </textarea>
+                                            <Editor 
+                                                :api-key="api_tinymce_key"
+                                                v-model="form.description" 
+                                                :init="editorInit"
+                                            />
                                             <div v-if="errors.description" class="text-mydanger mt-2">
                                                 {{ errors . description }}
                                             </div>
@@ -148,6 +149,7 @@
     import { reactive, onMounted, watch } from 'vue';
     import Swal from 'sweetalert2';
     import Dropzone from 'dropzone';
+    import Editor from '@tinymce/tinymce-vue';
 
     export default {
         layout: LayoutAdmin,
@@ -155,11 +157,13 @@
         components: {
             Head,
             Link,
+            Editor
         },
 
         props: {
             setting: Object,
             errors: Object,
+            api_tinymce_key: String,
         },
 
         setup() {
@@ -172,6 +176,24 @@
                 description: '',
                 image: null,
             });
+
+            const editorInit = {
+                menubar: false,
+                plugins: 'advlist lists link emoticons autoresize',
+                toolbar:
+                    'undo redo | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link emoticons',
+                style_formats: [
+                    { title: 'Paragraf', block: 'p' },
+                ],
+                min_height: 300,
+                max_height: 600,
+                content_style: `
+                    @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
+                    body {
+                        font-family: 'Nunito Sans', sans-serif;
+                    }
+                `
+            };
 
             onMounted(() => {
                 flatpickr("#kt_datepicker_1", {
@@ -189,7 +211,7 @@
                     paramName: 'image',
                     maxFiles: 1,
                     maxFilesize: 10,
-                    acceptedFiles: 'image/jpeg,image/png',
+                    acceptedFiles: 'image/jpeg,image/png,image/jpg,image/webp',
                     autoProcessQueue: false,
                     addRemoveLinks: true,
                     dictRemoveFile: 'Hapus',
@@ -249,6 +271,7 @@
 
             return {
                 form,
+                editorInit,
                 submit,
             };
         }

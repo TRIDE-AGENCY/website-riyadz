@@ -27,7 +27,13 @@ class BookController extends Controller
             ->where('launch_date', '<=', now())
             ->firstOrFail();
 
-        $description = Str::limit($book->description, 150);
+        $sessionKey = 'viewed_book_' . $book->id;
+        if (!session()->has($sessionKey)) {
+            $book->increment('views');
+            session()->put($sessionKey, true);
+        }
+
+        $description = Str::limit(strip_tags($book->description), 150);
 
         return inertia('User/Book/Show', [
             'setting'     => $setting,
@@ -35,6 +41,11 @@ class BookController extends Controller
             'description' => $description,
             'current_url' => url()->current(),
             'app_url'     => rtrim($setting->site_url, '/'),
+        ])->withViewData([
+            'meta_title'       => $book->title . ' − ' . $setting->site_title,
+            'meta_description' => $description,
+            'meta_image'       => asset('storage/' . $book->image),
+            'meta_url'         => url()->current(),
         ]);
     }
 }

@@ -38,10 +38,16 @@
                     >
                         <template v-if="index % 2 === 0">
                             <div class="h-100 d-flex flex-column flex-center flex-lg-start me-lg-20 pe-lg-20">
-                                <h3 class="flex-fill text-dark text-center me-lg-20 pe-lg-20 text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-3 mb-6">
-                                    {{ book.title }}
-                                </h3>
-                                <div class="me-lg-20 pe-lg-20 d-flex flex-column align-items-lg-start">
+                                <div class="flex-fill mb-6 me-lg-20 pe-lg-20">
+                                    <h3 class="text-dark text-center text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-2 mb-0">
+                                        {{ book.title }}
+                                    </h3>
+                                    <p v-if="book.description"
+                                        class="text-gray-600 text-center text-lg-start text-truncate-2 fs-5 mt-3 mb-0">
+                                        {{ stripHtml(book.description) }}
+                                    </p>
+                                </div>
+                                <div class="me-lg-20 pe-lg-20 d-flex flex-column align-items-center align-items-lg-start">
                                     <div class="fw-bolder d-flex align-items-center gap-2 mb-2 mb-lg-3">
                                         <i class="blog-icon ri-user-fill fw-semibold fs-2 text-myprimary"></i>
                                         <span class="fs-4 text-myprimary">{{ book.author }}</span>
@@ -53,7 +59,7 @@
                                 </div>
                             </div>
                             <img
-                                class="position-lg-absolute rounded-3 rounded-bottom-0 bottom-0 end-0 img-fluid object-fit-cover mw-300px w-lg-auto me-lg-10 h-lg-325px mx-auto w-100"
+                                class="position-lg-absolute rounded-3 border border-gray-300 border-bottom-0 rounded-bottom-0 bottom-0 end-0 img-fluid object-fit-cover mw-300px w-lg-auto me-lg-10 h-lg-325px mx-auto w-100"
                                 :src="`/storage/${book.image}`"
                                 :alt="book.title"
                             />
@@ -61,15 +67,21 @@
 
                         <template v-else>
                             <img
-                                class="order-1 position-lg-absolute rounded-3 rounded-bottom-0 bottom-0 start-0 img-fluid object-fit-cover mw-300px w-lg-auto ms-lg-10 h-lg-325px mx-auto w-100"
+                                class="order-1 position-lg-absolute rounded-3 border border-gray-300 border-bottom-0 rounded-bottom-0 bottom-0 start-0 img-fluid object-fit-cover mw-300px w-lg-auto ms-lg-10 h-lg-325px mx-auto w-100"
                                 :src="`/storage/${book.image}`"
                                 :alt="book.title"
                             />
                             <div class="h-100 d-flex flex-column flex-center flex-lg-start ms-lg-20 ps-lg-20">
-                                <h3 class="flex-fill text-dark text-center ms-lg-20 ps-lg-20 text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-3 mb-6">
-                                    {{ book.title }}
-                                </h3>
-                                <div class="ms-lg-20 ps-lg-20 d-flex flex-column align-items-lg-start">
+                                <div class="flex-fill mb-6 ms-lg-20 ps-lg-20">
+                                    <h3 class="text-dark text-center text-lg-start lh-sm fs-1 fs-lg-2x fw-bolder text-truncate-2 mb-0">
+                                        {{ book.title }}
+                                    </h3>
+                                    <p v-if="book.description"
+                                        class="text-gray-600 text-center text-lg-start text-truncate-2 fs-5 mt-3 mb-0">
+                                        {{ stripHtml(book.description) }}
+                                    </p>
+                                </div>
+                                <div class="ms-lg-20 ps-lg-20 d-flex flex-column align-items-center align-items-lg-start">
                                     <div class="fw-bolder d-flex align-items-center gap-2 mb-2 mb-lg-3">
                                         <i class="blog-icon ri-user-fill fw-semibold fs-2 text-myprimary"></i>
                                         <span class="fs-4 text-myprimary">{{ book.author }}</span>
@@ -113,7 +125,16 @@
                 return new Date(dateString).getFullYear();
             };
 
-            return { getYear };
+            const stripHtml = (html) => {
+                if (!html) return "Belum ada deskripsi untuk buku ini.";
+                let text = html.replace(/<[^>]*>?/gm, '');
+                return text;
+            };
+
+            return { 
+                getYear,
+                stripHtml
+            };
         }
     }
 </script>

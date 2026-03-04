@@ -18,5 +18,6 @@ class Book extends Model
         'total_pages',
         'image',
         'description',
+        'views',
     ];
 }

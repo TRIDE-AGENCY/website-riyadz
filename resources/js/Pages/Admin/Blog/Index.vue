@@ -56,7 +56,9 @@
                                             <th class="w-20px ps-6 pe-5 bg-secondary" style="letter-spacing: 0.04em;">#
                                             </th>
                                             <th class="bg-secondary min-w-300px" style="letter-spacing: 0.04em;">Blog</th>
-                                            <th class="bg-secondary min-w-150px" style="letter-spacing: 0.04em;">Status</th>
+                                            <th class="bg-secondary min-w-150px" style="letter-spacing: 0.04em;">Dibuat</th>
+                                            <th class="bg-secondary min-w-150px" style="letter-spacing: 0.04em;">Pengunjung</th>
+                                            <th class="bg-secondary min-w-125px" style="letter-spacing: 0.04em;">Status</th>
                                             <th class="bg-secondary pe-6 min-w-125px" style="letter-spacing: 0.04em;"></th>
                                         </tr>
                                     </thead>
@@ -67,7 +69,7 @@
                                             </td>
                                             <td class="d-flex align-items-center gap-4">
                                                 <div class="ratio ratio-4x3 w-55px w-md-65px flex-shrink-0">
-                                                    <img class="h-100 rounded img-fluid object-fit-cover"
+                                                    <img class="h-100 rounded border border-gray-300 img-fluid object-fit-cover"
                                                         :src="blog.image ? `/storage/${blog.image}` : '/assets/media/illustrations/blog-placeholder.png'" 
                                                         alt="Gambar Blog" />
                                                 </div>
@@ -79,6 +81,17 @@
                                                         {{ stripTags(blog.content) }}
                                                     </p>
                                                 </div>
+                                            </td>
+                                            <td>
+                                                <div class="d-flex flex-column">
+                                                    <span class="text-dark fw-bolder fs-5 mb-1">{{ formatDate(blog.created_at) }}</span>
+                                                    <span class="fs-7">{{ formatTime(blog.created_at) }}</span>
+                                                </div>
+                                            </td>
+                                            <td>
+                                                <p class="text-dark text-truncate-1 fs-5 fw-bolder mb-1">
+                                                    {{ blog.views }}x Dilihat
+                                                </p>
                                             </td>
                                             <td>
                                                 <span
@@ -144,6 +157,18 @@
                 });
             }
 
+            const formatDate = (dateString) => {
+                const options = { year: 'numeric', month: 'short', day: 'numeric' };
+                return new Date(dateString).toLocaleDateString('id-ID', options);
+            };
+
+            const formatTime = (dateString) => {
+                return new Date(dateString).toLocaleTimeString('id-ID', { 
+                    hour: '2-digit', 
+                    minute: '2-digit' 
+                });
+            };
+
             const destroy = (id) => {
                 Swal.fire({
                     icon: 'warning',
@@ -185,6 +210,8 @@
                 search,
                 handleSearch,
                 destroy,
+                formatDate,
+                formatTime,
                 stripTags
             };
         }

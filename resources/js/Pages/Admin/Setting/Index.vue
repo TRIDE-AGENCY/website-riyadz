@@ -239,8 +239,7 @@
                                         <p
                                             class="fs-5 d-none d-md-block text-gray-500 mt-3 mb-0 fw-normal"
                                         >
-                                            Mengatur informasi SEO untuk halaman
-                                            ini
+                                            Mengatur informasi SEO & subheading di hero
                                         </p>
                                     </div>
                                 </div>
@@ -273,7 +272,7 @@
                                     </div>
                                     <div class="mb-5 fv-row">
                                         <label class="required form-label fs-6"
-                                            >Deskripsi</label
+                                            >Deskripsi & Subheading</label
                                         >
                                         <textarea
                                             class="form-control rounded-3 fs-5"
@@ -435,6 +434,63 @@
                                         class="card-header p-6 d-flex flex-column m-0 border-0"
                                         style="min-height: unset"
                                     >
+                                        <h3 class="mb-0 fw-bolder">Gambar Iklan</h3>
+                                        <p
+                                            class="fs-5 d-none d-md-block text-gray-500 mt-3 mb-0 fw-normal"
+                                        >
+                                            Mengatur iklan di section blog pada hal. utama
+                                        </p>
+                                    </div>
+                                </div>
+                                <div
+                                    class="d-md-none border-bottom border-gray-300"
+                                ></div>
+                                <div
+                                    class="col-12 col-md-8 col-xl-9 card-body p-6"
+                                >
+                                    <div class="fv-row">
+                                        <div
+                                            id="ads-dropzone"
+                                            :key="dropzoneKey"
+                                            class="dropzone border-dashed border-myprimary rounded-3 p-5 text-center"
+                                        >
+                                            <div
+                                                class="dz-message needsclick flex-column text-center gap-5 p-5"
+                                            >
+                                                <i
+                                                    class="ri-image-add-line text-myprimary fs-3x"
+                                                ></i>
+                                                <div>
+                                                    <h3
+                                                        class="fs-5 fw-bolder text-gray-900 mb-2"
+                                                    >
+                                                        Jatuhkan file di sini /
+                                                        klik untuk mengunggah.
+                                                    </h3>
+                                                    <span
+                                                        class="fs-7 fw-semibold text-gray-500"
+                                                        >Maks. 10 MB • 120 x 600 pixel</span
+                                                    >
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div
+                                            v-if="errors.ads_image"
+                                            class="text-mydanger mt-2"
+                                        >
+                                            {{ errors.ads_image }}
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card rounded-4 border border-gray-300 mt-6">
+                            <div class="row align-items-start m-0">
+                                <div class="col-12 col-md-4 col-xl-3 p-0">
+                                    <div
+                                        class="card-header p-6 d-flex flex-column m-0 border-0"
+                                        style="min-height: unset"
+                                    >
                                         <h3 class="mb-0 fw-bolder">Konfigurasi</h3>
                                         <p
                                             class="fs-5 d-none d-md-block text-gray-500 mt-3 mb-0 fw-normal"
@@ -565,14 +621,17 @@
             const dropzoneImage = ref(null);
             const dropzoneFavicon = ref(null);
             const dropzoneOgImage = ref(null);
+            const dropzoneAdsImage = ref(null);
             const dropzoneKey = ref(Date.now());
             const originalImage = ref(props.setting.site_logo ?? null);
             const originalFavicon = ref(props.setting.site_favicon ?? null);
             const originalOgImage = ref(props.setting.og_image ?? null);
+            const originalAdsImage = ref(props.setting.ads_image ?? null);
 
             const imageFile = ref(null);
             const faviconFile = ref(null);
             const ogImageFile = ref(null);
+            const adsImageFile = ref(null);
 
             const form = reactive({
                 site_title: props.setting.site_title,
@@ -591,6 +650,7 @@
                 api_tinymce_key: props.setting.api_tinymce_key,
                 ga_property_id: props.setting.ga_property_id ?? '',
                 ga_measurement_id: props.setting.ga_measurement_id ?? '',
+                ads_image: props.setting.ads_image,
             });
 
             onMounted(() => {
@@ -711,6 +771,45 @@
                             });
                         },
                     });
+
+                    dropzoneAdsImage.value = new Dropzone("#ads-dropzone", {
+                        url: "/",
+                        maxFiles: 1,
+                        maxFilesize: 10,
+                        acceptedFiles: "image/jpeg,image/png",
+                        autoProcessQueue: false,
+                        addRemoveLinks: true,
+                        dictRemoveFile: "Hapus",
+                        init: function () {
+                            if (originalAdsImage.value) {
+                                const mockFile = {
+                                    name: originalAdsImage.value.split("/").pop(),
+                                    size: 12345,
+                                };
+
+                                let imageUrl = originalAdsImage.value;
+                                if (!imageUrl.startsWith("/storage/") && !imageUrl.startsWith("http")) {
+                                    imageUrl = `/storage/${imageUrl}`;
+                                }
+
+                                this.emit("addedfile", mockFile);
+                                this.emit("thumbnail", mockFile, imageUrl);
+                                this.emit("complete", mockFile);
+                                mockFile.previewElement.classList.add("dz-success", "dz-complete");
+                            }
+
+                            this.on("addedfile", (file) => {
+                                adsImageFile.value = file;
+                                if (this.files.length > 1) {
+                                    this.removeFile(this.files[0]);
+                                }
+                            });
+
+                            this.on("removedfile", () => {
+                                adsImageFile.value = null;
+                            });
+                        },
+                    });
                 });
             });
 
@@ -754,6 +853,12 @@
                     payload.append("og_image", ogImageFile.value);
                 } else {
                     payload.append("og_image_old", originalOgImage.value);
+                }
+
+                if (adsImageFile.value instanceof File) {
+                    payload.append("ads_image", adsImageFile.value);
+                } else {
+                    payload.append("ads_image_old", originalAdsImage.value);
                 }
 
                 const cleanup = () => {

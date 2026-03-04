@@ -8,23 +8,23 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="color-scheme" content="light only">
 
-    <title inertia>{{ $setting->site_title }}</title>
-    <meta name="description" content="{{ $setting->meta_description }}">
+    <title inertia>{{ $meta_title ?? $setting->site_title }}</title>
+    <meta name="description" content="{{ $meta_description ?? $setting->meta_description }}">
     <meta name="keywords" content="{{ $setting->meta_keywords }}">
     <meta name="author" content="Tride Agency">
 
     <meta property="og:type" content="website">
-    <meta property="og:title" content="{{ $setting->og_title }}">
-    <meta property="og:description" content="{{ $setting->og_description }}">
-    <meta property="og:image" content="{{ $setting->og_image ? asset('storage/' . $setting->og_image) : asset('assets/media/logos/logo-og.jpg') }}">
-    <meta property="og:url" content="{{ $setting->site_url }}">
+    <meta property="og:title" content="{{ $meta_title ?? $setting->og_title }}">
+    <meta property="og:description" content="{{ $meta_description ?? $setting->og_description }}">
+    <meta property="og:image" content="{{ $meta_image ?? ($setting->og_image ? asset('storage/' . $setting->og_image) : asset('assets/media/logos/logo-og.jpg')) }}">
+    <meta property="og:url" content="{{ $meta_url ?? $setting->site_url }}">
     <meta property="og:locale" content="id_ID">
 
     <meta name="twitter:card" content="summary">
-    <meta name="twitter:title" content="{{ $setting->og_title }}">
-    <meta name="twitter:description" content="{{ $setting->og_description }}">
-    <meta name="twitter:image" content="{{ $setting->og_image ? asset('storage/' . $setting->og_image) : asset('assets/media/logos/logo-og.jpg') }}">
-    <meta name="twitter:url" content="{{ $setting->site_url }}">
+    <meta name="twitter:title" content="{{ $meta_title ?? $setting->og_title }}">
+    <meta name="twitter:description" content="{{ $meta_description ?? $setting->og_description }}">
+    <meta name="twitter:image" content="{{ $meta_image ?? ($setting->og_image ? asset('storage/' . $setting->og_image) : asset('assets/media/logos/logo-og.jpg')) }}">
+    <meta name="twitter:url" content="{{ $meta_url ?? $setting->site_url }}">
 
     <link rel="icon" href="{{ $setting->site_favicon ? asset('storage/' . $setting->site_favicon) : asset('assets/media/logos/logo-favicon.png') }}" type="image/png" />
 

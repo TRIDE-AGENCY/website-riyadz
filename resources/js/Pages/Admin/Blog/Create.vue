@@ -164,9 +164,49 @@
 
             const editorInit = {
                 menubar: false,
-                plugins: 'advlist lists link emoticons autoresize',
+                plugins: 'advlist lists link emoticons autoresize image',
                 toolbar:
-                    'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link emoticons',
+                    'undo redo | styles | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist | link image emoticons',
+                    
+                image_title: true,
+                automatic_uploads: true,
+                file_picker_types: 'image',
+                
+                images_upload_handler: (blobInfo, progress) => new Promise((resolve, reject) => {
+                    const xhr = new XMLHttpRequest();
+                    xhr.withCredentials = false;
+                    xhr.open('POST', '/admin/blogs/upload-image'); 
+
+                    const token = document.querySelector('meta[name="csrf-token"]')?.getAttribute('content');
+                    xhr.setRequestHeader('X-CSRF-TOKEN', token);
+
+                    xhr.upload.onprogress = (e) => {
+                        progress(e.loaded / e.total * 100);
+                    };
+
+                    xhr.onload = () => {
+                        if (xhr.status < 200 || xhr.status >= 300) {
+                            reject('HTTP Error: ' + xhr.status);
+                            return;
+                        }
+                        const json = JSON.parse(xhr.responseText);
+                        if (!json || typeof json.location != 'string') {
+                            reject('Invalid JSON: ' + xhr.responseText);
+                            return;
+                        }
+                        resolve(json.location);
+                    };
+
+                    xhr.onerror = () => {
+                        reject('Image upload failed due to a network error.');
+                    };
+
+                    const formData = new FormData();
+                    formData.append('file', blobInfo.blob(), blobInfo.filename());
+
+                    xhr.send(formData);
+                }),
+
                 style_formats: [
                     { title: 'Paragraf', block: 'p' },
                     { title: 'Judul Besar', block: 'h2' },
@@ -175,10 +215,14 @@
                 ],
                 min_height: 300,
                 max_height: 600,
+                
                 content_style: `
                     @import url('https://fonts.googleapis.com/css2?family=Nunito+Sans&display=swap');
                     body {
                         font-family: 'Nunito Sans', sans-serif;
+                    }
+                    img { 
+                        max-width: 100%; height: auto; 
                     }
                 `
             };
@@ -189,7 +233,7 @@
                     paramName: 'image',
                     maxFiles: 1,
                     maxFilesize: 10,
-                    acceptedFiles: 'image/jpeg,image/png',
+                    acceptedFiles: 'image/jpeg,image/png,image/jpg,image/webp',
                     autoProcessQueue: false,
                     addRemoveLinks: true,
                     dictRemoveFile: 'Hapus',

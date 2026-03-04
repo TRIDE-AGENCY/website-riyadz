@@ -40,14 +40,14 @@ class BlogController extends Controller
     {
         $request->validate([
             'title'       => 'required|unique:blogs,title',
-            'image'       => 'required|image|mimes:jpg,jpeg,png|max:10240',
+            'image'       => 'required|image|mimes:jpg,jpeg,png,webp|max:10240',
             'content'     => 'required',
             'status'      => 'required',
         ], [
             'title.unique'     => 'Judul sudah digunakan. Gunakan judul lain.',
             'image.required'   => 'Gambar tidak boleh kosong.',
             'image.image'      => 'Gambar blog harus berupa file gambar.',
-            'image.mimes'      => 'Gambar blog harus berekstensi jpg, jpeg, atau png.',
+            'image.mimes'      => 'Gambar blog harus berekstensi jpg, jpeg, png, atau webp.',
             'image.max'        => 'Ukuran gambar blog maksimal 10MB.',
             'content.required' => 'Konten tidak boleh kosong.',
             'status.required'  => 'Status tidak boleh kosong.',
@@ -64,6 +64,37 @@ class BlogController extends Controller
         ]);
 
         return redirect()->route('admin.blogs.index');
+    }
+
+    public function uploadImageEditor(Request $request)
+    {
+        if ($request->hasFile('file')) {
+            $path = $request->file('file')->store('editor', 'public');
+            return response()->json([
+                'location' => asset('storage/' . $path)
+            ]);
+        }
+
+        return response()->json(['error' => 'Upload failed'], 500);
+    }
+
+    private function cleanupEditorImages($newContent, $oldContent = '')
+    {
+        preg_match_all('/editor\/([^\s"\'\?<>#]+)/', $oldContent, $oldMatches);
+        $oldImages = $oldMatches[1] ?? [];
+
+        if (empty($oldImages)) {
+            return;
+        }
+
+        foreach ($oldImages as $imageName) {
+            if (!str_contains($newContent, $imageName)) {
+                $path = 'editor/' . $imageName;
+                if (Storage::disk('public')->exists($path)) {
+                    Storage::disk('public')->delete($path);
+                }
+            }
+        }
     }
 
     public function edit($id)
@@ -84,17 +115,19 @@ class BlogController extends Controller
     {
         $request->validate([
             'title'       => 'required|unique:blogs,title,' . $blog->id,
-            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:10240',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png,webp|max:10240',
             'content'     => 'required',
             'status'      => 'required',
         ], [
             'title.unique'     => 'Judul sudah digunakan. Gunakan judul lain.',
             'image.image'      => 'Gambar blog harus berupa file gambar.',
-            'image.mimes'      => 'Gambar blog harus berekstensi jpg, jpeg, atau png.',
+            'image.mimes'      => 'Gambar blog harus berekstensi jpg, jpeg, png, atau webp.',
             'image.max'        => 'Ukuran gambar blog maksimal 10MB.',
             'content.required' => 'Konten tidak boleh kosong.',
             'status.required'  => 'Status tidak boleh kosong.',
         ]);
+
+        $oldContent = $blog->content;
 
         $path_image = $blog->image;
         if ($request->hasFile('image')) {
@@ -104,6 +137,8 @@ class BlogController extends Controller
 
             $path_image = $request->file('image')->store('blogs', 'public');
         }
+
+        $this->cleanupEditorImages($request->content, $oldContent);
 
         $blog->update([
             'title'       => $request->title,
@@ -123,6 +158,8 @@ class BlogController extends Controller
         if ($blog->image && Storage::disk('public')->exists($blog->image)) {
             Storage::disk('public')->delete($blog->image);
         }
+
+        $this->cleanupEditorImages('', $blog->content);
 
         $blog->delete();
 

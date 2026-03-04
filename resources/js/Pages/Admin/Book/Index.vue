@@ -57,6 +57,7 @@
                                             </th>
                                             <th class="bg-secondary min-w-300px" style="letter-spacing: 0.04em;">Buku</th>
                                             <th class="bg-secondary min-w-150px" style="letter-spacing: 0.04em;">Jumlah</th>
+                                            <th class="bg-secondary min-w-150px" style="letter-spacing: 0.04em;">Pengunjung</th>
                                             <th class="bg-secondary pe-6 min-w-125px" style="letter-spacing: 0.04em;"></th>
                                         </tr>
                                     </thead>
@@ -75,7 +76,12 @@
                                             </td>
                                             <td>
                                                 <p class="text-dark text-truncate-1 fs-5 fw-bolder mb-1">
-                                                    {{ book.total_pages }} Halaman
+                                                    {{ book.total_pages }} Hal
+                                                </p>
+                                            </td>
+                                            <td>
+                                                <p class="text-dark text-truncate-1 fs-5 fw-bolder mb-1">
+                                                    {{ book.views }}x Dilihat
                                                 </p>
                                             </td>
                                             <td class="text-end pe-6">

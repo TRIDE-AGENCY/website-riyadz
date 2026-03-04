@@ -36,7 +36,7 @@
                         :href="`/blogs/${blog.slug}`" class="col-12 col-sm-6 text-decoration-none">
                         <div id="blog-card" 
                             class="card border border-gray-300 h-100 p-4 d-flex flex-column rounded-4 gap-4 justify-content-between align-items-start bg-light">
-                            <div class="overflow-hidden position-relative rounded-3 ratio ratio-4x3">
+                            <div class="overflow-hidden position-relative rounded-3 border border-gray-300 ratio ratio-4x3">
                                 <img
                                     class="img-blog img-fluid object-fit-cover"
                                     :src="`/storage/${blog.image}`"
